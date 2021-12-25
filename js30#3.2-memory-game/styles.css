@@ -1,0 +1,40 @@
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+body {
+  background-color: rgb(11, 117, 204);
+}
+
+.header {
+  background-color: #000;
+}
+
+.header__title {
+  font-size: 40px;
+  color: #fff;
+  line-height: 80px;
+  text-align: center;
+}
+
+.field {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1em;
+}
+
+.field__row {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.field__cell {
+  width: 150px;
+  aspect-ratio: 1 / 1;
+  border-radius: 15px;
+  background-color: rgb(250, 125, 79);
+}
