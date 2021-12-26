@@ -53,11 +53,6 @@ body {
   backface-visibility: hidden;
 }
 
-
-
-
-
-
 @media (max-height: 800px) {
   .field {
     margin-top: 0px;
