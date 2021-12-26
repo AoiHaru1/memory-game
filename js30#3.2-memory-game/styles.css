@@ -21,7 +21,8 @@ body {
 .field {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 1em;
+  margin-top: 50px;
+  padding: 10px;
 }
 
 .field__row {
@@ -33,8 +34,32 @@ body {
 }
 
 .field__cell {
-  width: 150px;
+  width: 140px;
   aspect-ratio: 1 / 1;
   border-radius: 15px;
   background-color: rgb(250, 125, 79);
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateY(180deg);
+}
+
+.hidden-picture {
+  width: 75%;
+  height: 75%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  backface-visibility: hidden;
+}
+
+
+
+
+
+
+@media (max-height: 800px) {
+  .field {
+    margin-top: 0px;
+  }
 }
