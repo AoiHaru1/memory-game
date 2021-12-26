@@ -6,13 +6,14 @@ const pictures = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10'];
 const cellsIndex = [...fieldCell].map((c, i) => i);
 
 let pictureCheck = [];
+let maxSizeOfClickedPictures = false;
 
 // add card flip animation and event listener on click for it
 
 fieldCell.forEach(x => {
   x.style.transition = "transform 1.3s";
   x.addEventListener('click', () => {
-    if (onlyTwoPictureCheck === false) {
+    if (maxSizeOfClickedPictures === false) {
       x.style.transform = 'rotateY(360deg)'
     }
   });
@@ -43,9 +44,7 @@ const setPictureIntoCells = () => {
 
 setPictureIntoCells()
 
-const clearClickedState = () => {
-  fieldCell.forEach(x => x.classList.remove('clicked'))
-}
+// set succes state for equal pictures
 
 const setSuccesState = (name) => {
   fieldCell.forEach(x => {
@@ -54,6 +53,12 @@ const setSuccesState = (name) => {
       x.classList.add('succes')
     }
   })
+}
+ 
+// reset functions
+
+const clearClickedState = () => {
+  fieldCell.forEach(x => x.classList.remove('clicked'))
 }
 
 const clearWrongCombination = () => {
@@ -64,29 +69,31 @@ const clearWrongCombination = () => {
   })
 }
 
-let onlyTwoPictureCheck = false;
-
-const reset = () => {
-  onlyTwoPictureCheck = false;
+const CheckerVariablesReset = () => {
+  maxSizeOfClickedPictures = false;
   pictureCheck = [];
 }
 
+// picture combination checker
+
 const PictureCheckOnSecondReveal = () => {
   if (pictureCheck.length === 2) {
-    onlyTwoPictureCheck = true
+    maxSizeOfClickedPictures = true
     if (pictureCheck[0] !== pictureCheck[1]) {
       setTimeout(() => {
         clearWrongCombination()
-        reset()
+        CheckerVariablesReset()
         clearClickedState();
       }, 1000)
     } else {
       setSuccesState(pictureCheck[0])
-      reset()
+      CheckerVariablesReset()
     }
   }
 }
 
+
+// main card event listener
 
 fieldCell.forEach(x => {
   x.addEventListener('click', () => {
