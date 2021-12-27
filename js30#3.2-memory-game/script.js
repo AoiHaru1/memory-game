@@ -3,13 +3,73 @@ const cellPicture = document.querySelectorAll('.hidden-picture');
 const timer = document.querySelector('.timer');
 const timerSeconds = document.querySelector('.timer__seconds');
 const timerMinutes = document.querySelector('.timer__minutes');
+const gameMenu = document.querySelector('.game-menu');
+const gameWindow = document.querySelector('.game-window')
+const startButton = document.querySelector('.game-menu__start-button');
+const resultButton = document.querySelector('.game-menu__top-results')
+const resultWindow = document.querySelector('.top-results')
+const resultList = document.querySelector('.result-list')
 
 
-const pictures = ['01'];
+// game menu implement 
+
+const showWindowFromMenuAnimation = (element) => {
+  for (let i = 0.1; i <= 1; i+=0.1) {
+    setTimeout(() => {
+      element.style.opacity = `${i}`
+    }, 400 * i)
+  }
+}
+
+startButton.addEventListener('click', () => {
+  gameMenu.style.display = "none";
+  gameWindow.style.display = "block";
+  showWindowFromMenuAnimation(gameWindow)
+})
+
+resultButton.addEventListener('click', () => {
+  gameMenu.style.display = "none";
+  resultWindow.style.display = "block";
+  showWindowFromMenuAnimation(resultWindow)
+})
+
+
+
+// result window implement 
+
+const setStorageToResultWindow = () => {
+  for (let i = 1; i <= localStorage.length; i++) {
+    let element = document.createElement('li');
+    let number = document.createElement('span')
+    let time = document.createElement('span')
+    number.innerHTML = `${i}.`
+    time.innerHTML = `${localStorage[i]}`
+    element.classList.add("result-item")
+    time.classList.add("result-time")
+    element.appendChild(number)
+    element.appendChild(time)
+    resultList.appendChild(element)
+  }
+}
+
+setStorageToResultWindow()
+
+if (!resultList.innerHTML) {
+  resultList.innerHTML = `
+  <span class="no-result-text">There is no result yet<span/>
+  <img class="no-result-img" src="./img/no-results.png"></img>
+  `
+}
+console.log(!!resultList.innerHTML)
+
+// game field implement
+
+const pictures = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10'];
 const cellsIndex = [...fieldCell].map((c, i) => i);
 
 let pictureCheck = [];
 let maxSizeOfClickedPictures = false;
+
 
 // add card flip animation and event listener on click for it
 
@@ -160,6 +220,7 @@ const timerTick = () => {
     setTimeToLocalStorage()
     clearInterval(timeInterval)
     sortLocalStorage()
+    setStorageToResultWindow()
   }
 }
 
