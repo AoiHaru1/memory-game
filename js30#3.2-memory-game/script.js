@@ -40,9 +40,9 @@ resultButton.addEventListener('click', () => {
 
 const setStorageToResultWindow = () => {
   for (let i = 1; i <= localStorage.length; i++) {
-    let element = document.createElement('li');
-    let number = document.createElement('span');
-    let time = document.createElement('span');
+    const element = document.createElement('li');
+    const number = document.createElement('span');
+    const time = document.createElement('span');
     number.innerHTML = `${i}.`;
     time.innerHTML = `${localStorage[i]}`;
     element.classList.add("result-item");
@@ -65,7 +65,7 @@ if (!resultList.innerHTML) {
 // game field implement
 
 const pictures = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10'];
-const cellsIndex = [...fieldCell].map((c, i) => i);
+const cellsIndex = [...fieldCell].map((_, i) => i);
 
 let pictureCheck = [];
 let maxSizeOfClickedPictures = false;
@@ -109,7 +109,6 @@ const setPictureIntoCells = () => {
 };
 
 setPictureIntoCells();
-console.log(cellsIndex);
 
 // set succes state for equal pictures
 
@@ -135,9 +134,15 @@ const clearWrongCombination = () => {
   });
 };
 
-const VariablesCheckerReset = () => {
+const variablesCheckerReset = () => {
   maxSizeOfClickedPictures = false;
   pictureCheck = [];
+};
+
+const clearResultList = () => {
+  while (resultList.firstChild) {
+    resultList.removeChild(resultList.firstChild);
+  }
 };
 
 // picture combination checker
@@ -148,12 +153,12 @@ const PictureCheckOnSecondReveal = () => {
     if (pictureCheck[0] !== pictureCheck[1]) {
       setTimeout(() => {
         clearWrongCombination();
-        VariablesCheckerReset();
+        variablesCheckerReset();
         clearClickedState();
       }, 1000);
     } else {
       setSuccesState(pictureCheck[0]);
-      VariablesCheckerReset();
+      variablesCheckerReset();
     }
   }
 };
@@ -242,7 +247,7 @@ const fullReset = () => {
   });
   cellPicture.forEach(x => x.src = '');
   setPictureIntoCells();
-  VariablesCheckerReset();
+  variablesCheckerReset();
   timerSeconds.innerHTML = '00';
   timerMinutes.innerHTML = '00';
   activeInterval = false;
@@ -262,9 +267,3 @@ backFromResultsButton.addEventListener('click', () => {
   resultWindow.style.display = 'none';
   gameMenu.style.display = '';
 });
-
-const clearResultList = () => {
-  while (resultList.firstChild) {
-    resultList.removeChild(resultList.firstChild);
-  }
-};
