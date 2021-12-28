@@ -64,7 +64,7 @@ if (!resultList.innerHTML) {
 
 // game field implement
 
-const pictures = ['01'];
+const pictures = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10'];
 const cellsIndex = [...fieldCell].map((c, i) => i);
 
 let pictureCheck = [];
