@@ -9,7 +9,8 @@ const startButton = document.querySelector('.game-menu__start-button');
 const resultButton = document.querySelector('.game-menu__top-results')
 const resultWindow = document.querySelector('.top-results')
 const resultList = document.querySelector('.result-list')
-
+const backFromResultsButton = document.querySelector('.top__results-back')
+const backFromGameFieldButton = document.querySelector('.game-window__back')
 
 // game menu implement 
 
@@ -60,11 +61,10 @@ if (!resultList.innerHTML) {
   <img class="no-result-img" src="./img/no-results.png"></img>
   `
 }
-console.log(!!resultList.innerHTML)
 
 // game field implement
 
-const pictures = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10'];
+const pictures = ['01'];
 const cellsIndex = [...fieldCell].map((c, i) => i);
 
 let pictureCheck = [];
@@ -109,6 +109,7 @@ const setPictureIntoCells = () => {
 }
 
 setPictureIntoCells()
+console.log(cellsIndex)
 
 // set succes state for equal pictures
 
@@ -217,10 +218,11 @@ const timerTick = () => {
     timerSeconds.innerHTML = "00"
   }
   if (completeChecker()) {
-    setTimeToLocalStorage()
-    clearInterval(timeInterval)
-    sortLocalStorage()
-    setStorageToResultWindow()
+    setTimeToLocalStorage();
+    clearInterval(timeInterval);
+    sortLocalStorage();
+    clearResultList();
+    setStorageToResultWindow();
   }
 }
 
@@ -229,4 +231,40 @@ const runTimer = () => {
   timeInterval = setInterval(timerTick, 1000)
 }
 
-console.log(Object.keys(localStorage))
+// full reset
+
+const fullReset = () => {
+  clearInterval(timeInterval);
+  clearClickedState();
+  fieldCell.forEach(x => {
+      x.style.transform = 'rotateY(180deg)'
+      x.classList.remove('succes')
+  })
+  cellPicture.forEach(x => x.src = '')
+  setPictureIntoCells()
+  VariablesCheckerReset()
+  timerSeconds.innerHTML = '00'
+  timerMinutes.innerHTML = '00'
+  activeInterval = false
+}
+
+// back to menu listeners
+
+backFromGameFieldButton.addEventListener('click', () => {
+  gameWindow.style.display = 'none';
+  gameWindow.style.opacity = '0'
+  gameMenu.style.display = ''
+  fullReset()
+})
+
+backFromResultsButton.addEventListener('click', () => {
+  resultWindow.style.opacity = '0'
+  resultWindow.style.display = 'none'
+  gameMenu.style.display = ''
+})
+
+const clearResultList = () => {
+  while (resultList.firstChild) {
+    resultList.removeChild(resultList.firstChild);
+  }
+}

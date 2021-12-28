@@ -27,23 +27,24 @@ button {
   display: flex;
   flex-direction: column;
   gap: 50px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 421px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 210px;
 }
 
 .top-results {
   display: none;
+  position: relative;
   opacity: 0;
   width: 500px;
   height: 670px;
   background-color: rgb(250, 125, 79);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   border-radius: 25px;
+  border: 1px solid rgba(0, 0, 0, 0.116);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
 }
 
 .no-result-text {
@@ -70,7 +71,7 @@ button {
   line-height: 50px;
   margin-left: 15px;
   margin-right: 15px;
-  border: 2px solid rgba(47, 38, 38, 0.513);
+  border: 2px solid rgba(47, 38, 38, 0.582);
   border-radius: 10px;
   padding-left: 10px;
   margin-bottom: 10px;
@@ -94,6 +95,7 @@ button {
 .game-window {
   display: none;
   opacity: 0;
+  position: relative;
 }
 
 .header {
@@ -150,6 +152,25 @@ button {
   letter-spacing: 8px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   padding-bottom: 10px;
+}
+
+.btn {
+  display: block;
+  width: 170px;
+  font-size: 25px;
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.445);
+  background-color: rgb(250, 125, 79);
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+}
+
+.top__results-back {
+  position: absolute;
+  left: 34%;
+  top: 100%;
 }
 
 @media (max-height: 800px) {
