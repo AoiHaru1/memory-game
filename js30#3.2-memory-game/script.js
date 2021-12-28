@@ -22,6 +22,8 @@ const showWindowFromMenuAnimation = (element) => {
   }
 };
 
+window.ondragstart = function() { return false; } 
+
 startButton.addEventListener('click', () => {
   gameMenu.style.display = "none";
   gameWindow.style.display = "block";
@@ -62,7 +64,7 @@ if (!resultList.innerHTML) {
   `;
 }
 
-// game field implement
+//// game field implement
 
 const pictures = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10'];
 const cellsIndex = [...fieldCell].map((_, i) => i);
