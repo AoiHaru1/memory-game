@@ -173,6 +173,14 @@ button {
   top: 100%;
 }
 
+button:hover {
+  background-color: rgb(255, 100, 44);
+}
+
+button:active {
+  box-shadow: 1px 1px 5px #000;
+}
+
 @media (max-height: 800px) {
   .field {
     margin-top: 0px;
