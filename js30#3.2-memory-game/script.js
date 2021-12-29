@@ -22,8 +22,6 @@ const showWindowFromMenuAnimation = (element) => {
   }
 };
 
-window.ondragstart = function() { return false; } 
-
 startButton.addEventListener('click', () => {
   gameMenu.style.display = "none";
   gameWindow.style.display = "block";
@@ -111,6 +109,10 @@ const setPictureIntoCells = () => {
 };
 
 setPictureIntoCells();
+
+// prevent picture drag
+
+window.ondragstart = function() { return false; } 
 
 // set succes state for equal pictures
 
