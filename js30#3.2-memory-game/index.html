@@ -17,11 +17,16 @@
     <button class="game-menu__start-button">Начать игру</button>
     <button class="game-menu__top-results">Список рекордов</button>
   </div>
-  <div class="top-results">
+  <div class="top-results hide">
     <button class="top__results-back btn">Back to menu</button>
-    <ul class="result-list"></ul>
+    <ul class="result-list">
+      <div class="no-results-window hide">
+        <span class="no-result-text">There is no result yet</span>
+        <img class="no-result-img" src="./img/no-results.png"></img>
+      </div>
+    </ul>
   </div>
-  <div class="game-window">
+  <div class="game-window hide">
     <div class="field">
       <div class="timer">
         <span class="timer__minutes">00</span>

@@ -9,32 +9,27 @@ const startButton = document.querySelector('.game-menu__start-button');
 const resultButton = document.querySelector('.game-menu__top-results');
 const resultWindow = document.querySelector('.top-results');
 const resultList = document.querySelector('.result-list');
+const noResultsNotification = document.querySelector('.no-results-window');
 const backFromResultsButton = document.querySelector('.top__results-back');
 const backFromGameFieldButton = document.querySelector('.game-window__back');
 
-// game menu implement 
 
-const showWindowFromMenuAnimation = (element) => {
-  for (let i = 0.1; i <= 1; i+=0.1) {
-    setTimeout(() => {
-      element.style.opacity = `${i}`;
-    }, 400 * i);
-  }
+// toggle hide class
+
+const hideToggle = (parent) => {
+  parent.classList.toggle('hide');
+  gameMenu.classList.toggle('hide');
 };
 
+// game menu implement 
+
 startButton.addEventListener('click', () => {
-  gameMenu.style.display = "none";
-  gameWindow.style.display = "block";
-  showWindowFromMenuAnimation(gameWindow);
+  hideToggle(gameWindow);
 });
 
 resultButton.addEventListener('click', () => {
-  gameMenu.style.display = "none";
-  resultWindow.style.display = "block";
-  showWindowFromMenuAnimation(resultWindow);
+  hideToggle(resultWindow);
 });
-
-
 
 // result window implement 
 
@@ -55,11 +50,8 @@ const setStorageToResultWindow = () => {
 
 setStorageToResultWindow();
 
-if (!resultList.innerHTML) {
-  resultList.innerHTML = `
-  <span class="no-result-text">There is no result yet<span/>
-  <img class="no-result-img" src="./img/no-results.png"></img>
-  `;
+if (localStorage.length === 0) {
+  noResultsNotification.classList.toggle('hide')
 }
 
 //// game field implement
@@ -74,10 +66,10 @@ let maxSizeOfClickedPictures = false;
 // add card flip animation and event listener on click for it
 
 fieldCell.forEach(x => {
-  x.style.transition = "transform 1.3s";
+  x.classList.add('hui')
   x.addEventListener('click', () => {
     if (maxSizeOfClickedPictures === false) {
-      x.style.transform = 'rotateY(360deg)';
+      x.classList.add('cardRotate');
     }
     if (activeInterval === false) {
       runTimer();
@@ -133,7 +125,7 @@ const clearClickedState = () => {
 const clearWrongCombination = () => {
   fieldCell.forEach(x => {
     if (!x.classList.contains('succes')) {
-      x.style.transform = "rotateY(180deg)";
+      x.classList.remove('cardRotate');
     }
   });
 };
@@ -246,7 +238,7 @@ const fullReset = () => {
   clearInterval(timeInterval);
   clearClickedState();
   fieldCell.forEach(x => {
-      x.style.transform = 'rotateY(180deg)';
+      x.classList.remove('cardRotate');
       x.classList.remove('succes');
   });
   cellPicture.forEach(x => x.src = '');
@@ -260,14 +252,12 @@ const fullReset = () => {
 // back to menu listeners
 
 backFromGameFieldButton.addEventListener('click', () => {
-  gameWindow.style.display = 'none';
-  gameWindow.style.opacity = '0';
-  gameMenu.style.display = '';
+  hideToggle(gameWindow);
+  gameWindow.classList.remove('opacityToggle');
   fullReset();
 });
 
 backFromResultsButton.addEventListener('click', () => {
-  resultWindow.style.opacity = '0';
-  resultWindow.style.display = 'none';
-  gameMenu.style.display = '';
+  hideToggle(resultWindow);
+  resultWindow.classList.remove('opacityToggle');
 });
