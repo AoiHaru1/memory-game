@@ -31,15 +31,22 @@ resultButton.addEventListener('click', () => {
   hideToggle(resultWindow);
 });
 
+// set results item in local storage if its doesnt exist
+
+if (!localStorage.hasOwnProperty('results')) {
+  localStorage.setItem('results', '[]');
+}
+
 // result window implement 
 
 const setStorageToResultWindow = () => {
-  for (let i = 1; i <= localStorage.length; i++) {
+  const storageResultArr = JSON.parse(localStorage['results'])
+  for (let i = 0; i < storageResultArr.length; i++) {
     const element = document.createElement('li');
     const number = document.createElement('span');
     const time = document.createElement('span');
-    number.innerHTML = `${i}.`;
-    time.innerHTML = `${localStorage[i]}`;
+    number.innerHTML = `${i + 1}.`;
+    time.innerHTML = `${storageResultArr[i]}`;
     element.classList.add("result-item");
     time.classList.add("result-time");
     element.appendChild(number);
@@ -50,13 +57,13 @@ const setStorageToResultWindow = () => {
 
 setStorageToResultWindow();
 
-if (localStorage.length === 0) {
-  noResultsNotification.classList.toggle('hide')
+if (localStorage['results'].length <= 2) {
+  noResultsNotification.classList.toggle('hide');
 }
 
 //// game field implement
 
-const pictures = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10'];
+const pictures = ['01'];
 const cellsIndex = [...fieldCell].map((_, i) => i);
 
 let pictureCheck = [];
@@ -104,7 +111,7 @@ setPictureIntoCells();
 
 // prevent picture drag
 
-window.ondragstart = function() { return false; } 
+window.ondragstart = () => false
 
 // set succes state for equal pictures
 
@@ -192,24 +199,21 @@ const completeChecker = () => {
 const sortLocalStorage = () => {
   const getMinutes = x => +x.slice(0, 2);
   const getSeconds = x => +x.slice(-2);
-  const storageValues = Object.values(localStorage);
-  const sortedStorageValues = storageValues.sort((a, b) => getMinutes(a) - getMinutes(b)).sort((a, b) => {
+  const storageResultArr = JSON.parse(localStorage['results']);
+  const sortedStorageResults = storageResultArr.sort((a, b) => getMinutes(a) - getMinutes(b)).sort((a, b) => {
     if (getMinutes(a) === getMinutes(b)) {
       return getSeconds(a) - getSeconds(b);
     }
   });
-  for (let i = 0; i < localStorage.length; i++) {
-    localStorage[i + 1] = sortedStorageValues[i];
-  }
+  localStorage['results'] = JSON.stringify(sortedStorageResults)
 };
 
+sortLocalStorage()
+
 const setTimeToLocalStorage = () => {
-  let localStorageKeys = Object.keys(localStorage);
-  if (+`${localStorageKeys.length + 1}` !== 11) {
-    localStorage.setItem(`${localStorageKeys.length + 1}`, `${timerMinutes.innerHTML}:${timerSeconds.innerHTML}`);
-  } else {
-    localStorage.setItem(`10`, `${timerMinutes.innerHTML}:${timerSeconds.innerHTML}`);
-  }
+  const storageResultArr = JSON.parse(localStorage['results']);
+  storageResultArr.push(`${timerMinutes.innerHTML}:${timerSeconds.innerHTML}`)
+  localStorage['results'] = JSON.stringify(storageResultArr)
 };
 
 const timerTick = () => {
@@ -238,8 +242,8 @@ const fullReset = () => {
   clearInterval(timeInterval);
   clearClickedState();
   fieldCell.forEach(x => {
-      x.classList.remove('cardRotate');
-      x.classList.remove('succes');
+    x.classList.remove('cardRotate');
+    x.classList.remove('succes');
   });
   cellPicture.forEach(x => x.src = '');
   setPictureIntoCells();
