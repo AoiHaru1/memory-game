@@ -41,7 +41,10 @@ if (!localStorage.hasOwnProperty('results')) {
 
 const setStorageToResultWindow = () => {
   const storageResultArr = JSON.parse(localStorage['results'])
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < storageResultArr.length; i++) {
+    if(i === 10) {
+      break
+    }
     const element = document.createElement('li');
     const number = document.createElement('span');
     const time = document.createElement('span');
