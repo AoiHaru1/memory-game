@@ -67,7 +67,7 @@ if (localStorage['results'].length <= 2) {
 
 //// game field implement
 
-const pictures = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10']
+const pictures = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10'];
 const cellsIndex = [...fieldCell].map((_, i) => i);
 
 let pictureCheck = [];
@@ -232,9 +232,10 @@ const timerTick = () => {
   if (completeChecker()) {
     setTimeToLocalStorage();
     
-    document.querySelector('.field').innerHTML = `<div class="end">
+    gameWindow.innerHTML = `<div class="end">
     <div>Игра была пройдена за ${moves.innerHTML} ходов. <br> Перезагрузите страницу для новой игры.</div>
-    </div>`
+    </div>`;
+    document.querySelector('.footer').classList.add('margin')
     clearInterval(timeInterval);
     sortLocalStorage();
     clearResultList();

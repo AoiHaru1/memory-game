@@ -241,6 +241,10 @@ button:active {
   white-space: nowrap;
 }
 
+.margin {
+  margin-top: 730px;
+}
+
 .footer {
   display: flex;
   justify-content: space-between;
