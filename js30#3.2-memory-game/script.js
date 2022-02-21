@@ -12,6 +12,7 @@ const resultList = document.querySelector('.result-list');
 const noResultsNotification = document.querySelector('.no-results-window');
 const backFromResultsButton = document.querySelector('.top__results-back');
 const backFromGameFieldButton = document.querySelector('.game-window__back');
+const moves = document.querySelector('.moves')
 
 
 // toggle hide class
@@ -76,7 +77,7 @@ let maxSizeOfClickedPictures = false;
 // add card flip animation and event listener on click for it
 
 fieldCell.forEach(x => {
-  x.classList.add('hui')
+  x.classList.add('rotate')
   x.addEventListener('click', () => {
     if (maxSizeOfClickedPictures === false) {
       x.classList.add('cardRotate');
@@ -154,6 +155,9 @@ const clearResultList = () => {
 // picture combination checker
 
 const PictureCheckOnSecondReveal = () => {
+  if (pictureCheck.length < 3) {
+    moves.innerHTML = `${getZero(+moves.innerHTML + 1)}`
+  }
   if (pictureCheck.length === 2) {
     maxSizeOfClickedPictures = true;
     if (pictureCheck[0] !== pictureCheck[1]) {
@@ -227,6 +231,7 @@ const timerTick = () => {
   }
   if (completeChecker()) {
     setTimeToLocalStorage();
+    gameWindow.innerHTML = `<div class="end">Игра была пройдена за ${moves.innerHTML} ходов</div>`
     clearInterval(timeInterval);
     sortLocalStorage();
     clearResultList();
