@@ -163,9 +163,15 @@ button {
   transition: transform 1.3s;
 }
 
+.timer {
+  position: relative;
+  width: 481px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .moves {
-  position: absolute;
-  right: 430px; 
+  margin-left: auto;
 }
 
 .field__cell {
@@ -231,7 +237,29 @@ button:active {
   transform: translate(-50%, 50%);
   margin-top: 200px;
   font-size: 47px;
-  
+  white-space: nowrap;
+}
+
+.footer {
+  margin-top: auto;
+  display: flex;
+  height: 30px;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  width: 90%;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.footer a:first-of-type img {
+  width: 100px;
+  height: 100px;
+}
+
+.footer span {
+  font-size: 24px;
 }
 
 @media (max-height: 800px) {
