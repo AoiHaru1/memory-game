@@ -56,6 +56,7 @@ button {
   flex-direction: column;
   gap: 50px;
   width: 421px;
+  height: 550px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 210px;
@@ -241,16 +242,12 @@ button:active {
 }
 
 .footer {
-  margin-top: auto;
   display: flex;
-  height: 30px;
   justify-content: space-between;
   align-items: center;
-  position: absolute;
-  bottom: 0;
   width: 90%;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .footer a:first-of-type img {
